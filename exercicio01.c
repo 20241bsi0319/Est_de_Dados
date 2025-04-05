@@ -1,10 +1,9 @@
 #include <stdio.h>
-
 void calc_inter(int cA[50], int tA, int cB[50], int tB, int cI[50], int *tI){
     for(int i = 0; i < tA; i++){
         for(int j = 0; j < tB; j++){
             if(cA[i] == cB[j]){
-		cI[*tI] = cA[i];
+		        cI[*tI] = cA[i];
                 (*tI)++;
             }
         }
@@ -14,6 +13,10 @@ void calc_inter(int cA[50], int tA, int cB[50], int tB, int cI[50], int *tI){
 void printC(int conj[50], int tam){
     for(int i = 0; i < tam; i++){
         printf("%d", conj[i]);
+        if(i == (tam - 1)){
+            break;
+        }
+        printf(", ");
     }
     printf("\n");
 }
