@@ -38,7 +38,7 @@ void le_prod(tabela tab, int *t){
 void print_tab(tabela tab, int t){
     printf("Tabela: \n");
     for(int i=0; i<t; i++){
-        printf('a');
+        printf('id');
     }
 }
 
