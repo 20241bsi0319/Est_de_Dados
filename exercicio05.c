@@ -1,53 +1,74 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-typedef struct produto{
+typedef struct linha{
     int id;
     char nome[64];
     char fabricante[64];
     float preco;
-    int quantidade;
-} produto;
+    int quant;
+} t_prod;
 
-typedef produto tabela[10];
+typedef t_prod tabela[10];
 
-void le_prod(tabela tab, int *t){
-    int tam = 3;
-    *t = 0;
-
-    for(int i = 0; i < tam; i++){
-        printf("Insira o ID do produto: ");
-        scanf('%d', tab[i].id);
-
-        printf("Insira o nome do produto: ");
-        fgets(tab[i].nome, 63, stdin);
-
-        printf("Insira o fabricante do produto: ");
-        fgets(tab[i].fabricante, 63, stdin);
-
-        printf("Insira o ID do produto: ");
-        scanf('%f', tab[i].preco);
-
-        printf("Insira o ID do produto: ");
-        scanf('%d', tab[i].quantidade);
-        printf('\n');
-        (*t)++;
+void remove_enter(char *str) {
+    int i = 0;
+    while (str[i] != '\0') {
+        if (str[i] == '\n') {
+            str[i] = '\0';
+            break;
+        }
+        i++;
     }
 }
 
-void print_tab(tabela tab, int t){
-    printf("Tabela: \n");
-    for(int i=0; i<t; i++){
-        printf('id');
+void gera_tab(tabela tab, int *size){
+    *size = 0;
+    char buffer[64];
+
+    printf("Preencha o conteúdo da tabela: \n");
+    for(int i = 0; i < 3; i++){
+        printf("ID do produto: ");
+        fgets(buffer, 63, stdin);
+        tab[i].id = atoi(buffer);
+
+        printf("Nome: ");
+        fgets(tab[i].nome, 63, stdin);
+        remove_enter(tab[i].nome);
+
+        printf("Fabricante: ");
+        fgets(tab[i].fabricante, 63, stdin);
+        remove_enter(tab[i].fabricante);
+
+        printf("Preço: ");
+        fgets(buffer, 63, stdin);
+        tab[i].preco = atof(buffer);
+
+        printf("Quantidade: ");
+        fgets(buffer, 63, stdin);
+        tab[i].quant = atoi(buffer);
+
+    
+        printf("\n");
+        (*size)++;
+    }
+}
+
+void print_tab(tabela tab, int size){
+    printf("TABELA DE PRODUTOS: \n");
+    printf("%s   %s   %s   %s   %s \n", "ID", "Nome", "Fabricante", "Preço", "Quantidade");
+    for(int i = 0; i < size; i++){
+        printf("%5d     %s     %s     %2.f     %3d \n", tab[i].id, tab[i].nome, tab[i].fabricante, tab[i].preco, tab[i].quant);
     }
 }
 
 int main(){
-tabela produtos;
-int tam;
+    tabela produtos;
+    int tam;
 
-le_prod(produtos, &tam);
-print_tab(produtos, tam);
+    gera_tab(produtos, &tam);
+    print_tab(produtos, tam);
 
     return 0;
 }
