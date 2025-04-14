@@ -12,15 +12,8 @@ typedef struct linha{
 
 typedef t_prod tabela[10];
 
-void remove_enter(char *str) {
-    int i = 0;
-    while (str[i] != '\0') {
-        if (str[i] == '\n') {
-            str[i] = '\0';
-            break;
-        }
-        i++;
-    }
+void remove_enter(char str[64]){
+    str[strlen(str) - 1] = '\0';
 }
 
 void gera_tab(tabela tab, int *size){
@@ -59,7 +52,7 @@ void print_tab(tabela tab, int size){
     printf("TABELA DE PRODUTOS: \n");
     printf("%s   %s   %s   %s   %s \n", "ID", "Nome", "Fabricante", "Preço", "Quantidade");
     for(int i = 0; i < size; i++){
-        printf("%5d     %s     %s     %2.f     %3d \n", tab[i].id, tab[i].nome, tab[i].fabricante, tab[i].preco, tab[i].quant);
+        printf("%3d  %s    %s     %2.f     %d \n", tab[i].id, tab[i].nome, tab[i].fabricante, tab[i].preco, tab[i].quant);
     }
 }
 
